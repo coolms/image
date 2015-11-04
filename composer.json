@@ -1,0 +1,40 @@
+{
+  "name" : "coolms/image",
+  "description" : "CoolMS2 Image Module",
+  "version" : "0.1.0",
+  "type" : "library",
+  "keywords" : [ "zf2", "coolms", "coolms2", "image" ],
+  "homepage" : "https://github.com/coolms/image",
+  "license" : "BSD-3-Clause",
+  "authors" : [ {
+    "name" : "Dmitry Popov",
+    "email" : "d.popov@altgraphic.com",
+    "role" : "Developer"
+  } ],
+  "require" : {
+    "php" : ">=5.5.0",
+    "coolms/common" : "dev-master@dev",
+    "coolms/file" : "dev-master@dev"
+  },
+  "require-dev" : {
+    "phpunit/phpunit" : "~4.5"
+  },
+  "autoload" : {
+    "psr-4" : { "CmsImage\\" : "src/" }
+  },
+  "autoload-dev" : {
+    "psr-4": { "CmsImageTest\\" : "tests/" }
+  },
+  "extra" : {
+    "branch-alias" : {
+      "dev-master" : "0.1.x-dev"
+    }
+  },
+  "repositories" : [ {
+    "type" : "vcs",
+    "url" : "https://www.github.com/coolms/common"
+  }, {
+    "type" : "vcs",
+    "url" : "https://www.github.com/coolms/file"
+  } ]
+}
