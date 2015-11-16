@@ -68,6 +68,16 @@ return [
             'CmsImage\Listener\ImageUploadListener' => 'CmsImage\Listener\ImageUploadListener',
         ],
     ],
+    'translator' => [
+        'translation_file_patterns' => [
+            [
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.mo',
+                'text_domain' => __NAMESPACE__,
+            ],
+        ],
+    ],
     'view_helpers' => [
         'invokables' => [
             'cmsImage' => 'CmsImage\View\Helper\Image',
