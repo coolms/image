@@ -20,8 +20,17 @@ msgstr "Изображение"
 msgid "Images"
 msgstr "Изображения"
 
-msgid "Name"
+msgid "Title"
 msgstr "Название изображения"
 
 msgid "Description"
 msgstr "Описание изображения"
+
+msgid "Alternative text"
+msgstr "Альтернативный текст"
+
+msgid "Width"
+msgstr "Ширина"
+
+msgid "Height"
+msgstr "Высота"
