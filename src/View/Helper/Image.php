@@ -84,7 +84,7 @@ class Image extends AbstractHelper
         }
 
         if (!$imageOrId instanceof ImageInterface) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Argument #1 is expected to be a valid id or an instance of %s; %s given',
                 ImageInterface::class,
                 is_object($imageOrId) ? get_class($imageOrId) : gettype($imageOrId)
