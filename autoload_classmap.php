@@ -3,6 +3,7 @@
 return array(
     'CmsImage\Factory\Form\Element\ImageUploadElementFactory' => __DIR__ . '/src/Factory/Form/Element/ImageUploadElementFactory.php',
     'CmsImage\Factory\ModuleOptionsFactory'                   => __DIR__ . '/src/Factory/ModuleOptionsFactory.php',
+    'CmsImage\Factory\View\Helper\ImageHelperFactory'         => __DIR__ . '/src/Factory/View/Helper/ImageHelperFactory.php',
     'CmsImage\Listener\ImageUploadListener'                   => __DIR__ . '/src/Listener/ImageUploadListener.php',
     'CmsImage\Mapping\ImageableInterface'                     => __DIR__ . '/src/Mapping/ImageableInterface.php',
     'CmsImage\Mapping\ImageInterface'                         => __DIR__ . '/src/Mapping/ImageInterface.php',

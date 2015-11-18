@@ -79,8 +79,11 @@ return [
         ],
     ],
     'view_helpers' => [
-        'invokables' => [
+        'aliases' => [
             'cmsImage' => 'CmsImage\View\Helper\Image',
+        ],
+        'factories' => [
+            'CmsImage\View\Helper\Image' => 'CmsImage\Factory\View\Helper\ImageHelperFactory',
         ],
     ],
     'view_manager' => [

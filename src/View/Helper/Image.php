@@ -10,7 +10,10 @@
 
 namespace CmsImage\View\Helper;
 
-use Zend\View\Helper\AbstractHelper,
+use InvalidArgumentException,
+    Zend\View\Helper\AbstractHelper,
+    CmsCommon\Persistence\MapperInterface,
+    CmsCommon\Persistence\MapperProviderTrait,
     CmsCommon\View\Helper\Img,
     CmsFile\View\Helper\BasePath,
     CmsImage\Mapping\ImageInterface;
@@ -22,6 +25,8 @@ use Zend\View\Helper\AbstractHelper,
  */
 class Image extends AbstractHelper
 {
+    use MapperProviderTrait;
+
     /**
      * @var Img
      */
@@ -43,52 +48,75 @@ class Image extends AbstractHelper
     protected $defaultBasePathHelper = 'fileBasePath';
 
     /**
-     * @param ImageInterface $image
+     * __construct
+     *
+     * @param MapperInterface $mapper
+     */
+    public function __construct(MapperInterface $mapper)
+    {
+        $this->setMapper($mapper);
+    }
+
+    /**
+     * @param mixed $imageOrId
      * @param array $attribs
      * @return self|string
      */
-    public function __invoke(ImageInterface $image = null, array $attribs = [])
+    public function __invoke($imageOrId = null, array $attribs = [])
     {
         if (0 === func_num_args()) {
             return $this;
         }
 
-        return $this->render($image, $attribs);
+        return $this->render($imageOrId, $attribs);
     }
 
     /**
-     * @param ImageInterface $image
+     * @param mixed $imageOrId
      * @param array $attribs
+     * @throws InvalidArgumentException
      * @return string
      */
-    public function render(ImageInterface $image, array $attribs = [])
+    public function render($imageOrId, array $attribs = [])
     {
+        if (is_scalar($imageOrId)) {
+            $imageOrId = $this->getMapper()->find($imageOrId);
+        }
+
+        if (!$imageOrId instanceof ImageInterface) {
+            throw new \InvalidArgumentException(
+                'Argument #1 is expected to be a valid id or an instance of %s; %s given',
+                ImageInterface::class,
+                is_object($imageOrId) ? get_class($imageOrId) : gettype($imageOrId)
+            );
+        }
+
         $requiredAttribs = [];
-        if ($alt = $image->getAlt()) {
+        if ($alt = $imageOrId->getAlt()) {
             $requiredAttribs['alt'] = $alt;
         }
 
-        if ($width = $image->getWidth()) {
+        if ($width = $imageOrId->getWidth()) {
             $requiredAttribs['width'] = $width;
         }
 
-        if ($height = $image->getHeight()) {
+        if ($height = $imageOrId->getHeight()) {
             $requiredAttribs['height'] = $height;
         }
 
         if (!array_key_exists('title', $attribs)) {
-            $attribs['title'] = $image->getTitle();
+            $attribs['title'] = $imageOrId->getTitle();
         }
 
         if (!array_key_exists('id', $attribs)) {
-            $attribs['id'] = 'cms-image-' . $image->getId();
+            $attribs['id'] = 'cms-image-' . $imageOrId->getId();
         }
 
-        $attribs = array_merge($image->getAttribs(), $requiredAttribs, $attribs);
+        $attribs = array_merge($imageOrId->getAttribs(), $requiredAttribs, $attribs);
         $attribs = array_merge_recursive($attribs, ['class' => 'cms-image']);
 
         $basePathHelper = $this->getBasePathHelper();
-        $attribs['src'] = $basePathHelper($image);
+        $attribs['src'] = $basePathHelper($imageOrId);
 
         $imgHelper = $this->getImgHelper();
 
