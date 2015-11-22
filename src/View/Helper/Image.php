@@ -11,13 +11,12 @@
 namespace CmsImage\View\Helper;
 
 use InvalidArgumentException,
-    Zend\View\Helper\AbstractHtmlElement,
     CmsCommon\Persistence\MapperInterface,
     CmsCommon\Persistence\MapperProviderTrait,
+    CmsCommon\View\Helper\HtmlContainer,
     CmsCommon\View\Helper\Img,
     CmsFile\View\Helper\BasePath,
     CmsImage\Mapping\ImageInterface;
-use CmsCommon\View\Helper\HtmlContainer;
 
 /**
  * View Helper to render objects implementing ImageInterface
