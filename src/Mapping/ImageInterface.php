@@ -19,7 +19,20 @@ interface ImageInterface extends FileInterface
      * @return self
      */
     public function setAttribs(array $attribs);
-    
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @return self
+     */
+    public function setAttrib($name, $value);
+
+    /**
+     * @param string $name
+     * @return self
+     */
+    public function removeAttrib($name);
+
     /**
      * @return array
      */
