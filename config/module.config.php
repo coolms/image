@@ -82,6 +82,11 @@ return [
         'aliases' => [
             'cmsImage' => 'CmsImage\View\Helper\Image',
         ],
+        'delegators' => [
+            'formStatic' => [
+                'CmsImage\Factory\Form\View\Helper\FormStaticDelegatorFactory',
+            ],
+        ],
         'factories' => [
             'CmsImage\View\Helper\Image' => 'CmsImage\Factory\View\Helper\ImageHelperFactory',
         ],
